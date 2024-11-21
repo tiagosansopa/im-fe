@@ -22,7 +22,7 @@ export default function Hero() {
   return (
     <section className="relative w-full min-h-[70vh] flex items-center">
       {/* Fixed Background Carousel */}
-      <div className="fixed inset-0 w-full h-full overflow-hidden z-0">
+      <div className="fixed inset-0 w-full h-full overflow-hidden z-[-1]">
         {images.map((image, index) => (
           <img
             key={index}
