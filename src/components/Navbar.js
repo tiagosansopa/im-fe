@@ -40,22 +40,34 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6 font-funnel">
           <a
-            href="#hero"
+            href="#about"
             className="text-black transition-opacity duration-300 hover:opacity-70"
           >
             Nosotros
           </a>
           <a
+            href="#values"
+            className="text-black transition-opacity duration-300 hover:opacity-70"
+          >
+            Valores
+          </a>
+          <a
             href="#location"
+            className="text-black transition-opacity duration-300 hover:opacity-70"
+          >
+            Ubicaciones
+          </a>
+          <a
+            href="#products"
             className="text-black transition-opacity duration-300 hover:opacity-70"
           >
             Productos
           </a>
           <a
-            href="#contact"
+            href="#us"
             className="text-black transition-opacity duration-300 hover:opacity-70"
           >
-            Contacto
+            Historia
           </a>
         </nav>
 
@@ -77,25 +89,39 @@ export default function Navbar() {
       >
         <div className="flex flex-col items-center pt-16 space-y-6 font-funnel">
           <a
-            href="#hero"
+            href="#about"
             className="text-white transition-opacity duration-300 hover:opacity-70"
             onClick={() => setMenuOpen(false)}
           >
             Nosotros
           </a>
           <a
+            href="#values"
+            className="text-white transition-opacity duration-300 hover:opacity-70"
+            onClick={() => setMenuOpen(false)}
+          >
+            Valores
+          </a>
+          <a
             href="#location"
+            className="text-white transition-opacity duration-300 hover:opacity-70"
+            onClick={() => setMenuOpen(false)}
+          >
+            Ubicaciones
+          </a>
+          <a
+            href="#products"
             className="text-white transition-opacity duration-300 hover:opacity-70"
             onClick={() => setMenuOpen(false)}
           >
             Productos
           </a>
           <a
-            href="#contact"
+            href="#us"
             className="text-white transition-opacity duration-300 hover:opacity-70"
             onClick={() => setMenuOpen(false)}
           >
-            Contacto
+            Historia
           </a>
         </div>
       </div>
