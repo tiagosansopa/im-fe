@@ -1,7 +1,7 @@
 export default function Values() {
   return (
     <section
-      id="values"
+      id="valores"
       className="relative z-10 p-8 pt-20 bg-white text-center font-funnel text-gray-800"
     >
       <div className="max-w-screen-lg mx-auto">

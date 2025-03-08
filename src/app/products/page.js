@@ -54,7 +54,7 @@ const products = [
   {
     id: 7,
     name: "Corte",
-    image: "/demo/servicio_corte.png",
+    image: "/fotos/servicios_2.jpeg",
     detail: "/demo/l_caliente_medidas.png",
     type: "service",
     description: "Esto es cortes",
@@ -62,7 +62,7 @@ const products = [
   {
     id: 8,
     name: "Doble",
-    image: "/demo/servicio_doble.png",
+    image: "/fotos/servicios_3.jpeg",
     detail: "/demo/l_caliente_medidas.png",
     type: "service",
     description: "Esto es doble",
@@ -71,11 +71,11 @@ const products = [
 
 export default function ProductsPage() {
   const [activeFilter, setActiveFilter] = useState("all");
-  const [expandedCard, setExpandedCard] = useState(null);
+  const [expandedProduct, setExpandedProduct] = useState(null);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
-    setExpandedCard(null);
+    setExpandedProduct(null);
   };
 
   const filteredProducts =
@@ -85,88 +85,93 @@ export default function ProductsPage() {
 
   return (
     <Layout>
-      <section className="pt-36 bg-white flex-grow">
-        <h2 className="text-3xl font-bold text-blue-950 mb-6">CATÁLOGO</h2>
+      {/* Full-width background */}
+      <section className="w-full pt-36 bg-white flex-grow">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-blue-950 mb-6 text-center">
+            CATÁLOGO
+          </h2>
 
-        <div className="flex justify-center mb-6 space-x-4">
-          <button
-            className={`px-4 py-2 rounded-full ${
-              activeFilter === "all"
-                ? "bg-blue-800 text-white"
-                : "bg-gray-200 text-gray-800"
-            } hover:bg-blue-800 hover:text-white transition`}
-            onClick={() => handleFilterChange("all")}
-          >
-            Todos
-          </button>
-          <button
-            className={`px-4 py-2 rounded-full ${
-              activeFilter === "product"
-                ? "bg-blue-800 text-white"
-                : "bg-gray-200 text-gray-800"
-            } hover:bg-blue-800 hover:text-white transition`}
-            onClick={() => handleFilterChange("product")}
-          >
-            Productos
-          </button>
-          <button
-            className={`px-4 py-2 rounded-full ${
-              activeFilter === "service"
-                ? "bg-blue-800 text-white"
-                : "bg-gray-200 text-gray-800"
-            } hover:bg-blue-800 hover:text-white transition`}
-            onClick={() => handleFilterChange("service")}
-          >
-            Servicios
-          </button>
-        </div>
+          {/* Filter buttons */}
+          <div className="flex justify-center mb-6 space-x-4">
+            {["all", "product", "service"].map((filter) => (
+              <button
+                key={filter}
+                className={`px-4 py-2 rounded-full ${
+                  activeFilter === filter
+                    ? "bg-blue-800 text-white"
+                    : "bg-gray-200 text-gray-800"
+                } hover:bg-blue-800 hover:text-white transition`}
+                onClick={() => handleFilterChange(filter)}
+              >
+                {filter === "all"
+                  ? "Todos"
+                  : filter === "product"
+                  ? "Productos"
+                  : "Servicios"}
+              </button>
+            ))}
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className={`p-5 bg-white shadow-lg shadow-zinc-600 rounded-lg hover:shadow-xl transition-shadow ${
-                expandedCard === product.id ? "col-span-3" : ""
-              }`}
-              onClick={() =>
-                setExpandedCard(expandedCard === product.id ? null : product.id)
-              }
-            >
-              {expandedCard === product.id ? (
-                <div className="space-y-4">
-                  <div>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-sm h-80 object-cover rounded-md"
-                    />
-                    <img
-                      src={product.detail}
-                      alt={product.name}
-                      className="w-sm h-80 object-cover rounded-md"
-                    />
-                  </div>
-                  <h3 className="text-xl text-blue-950 font-semibold">
-                    {product.name}
-                  </h3>
-                  <p className="text-gray-700">{product.description}</p>
-                </div>
-              ) : (
-                <>
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-40 object-cover rounded-md"
-                  />
-                  <h3 className="mt-4 text-xl text-blue-950 font-semibold">
-                    {product.name}
-                  </h3>
-                </>
-              )}
-            </div>
-          ))}
+          {/* Product Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <div
+                key={product.id}
+                className="p-5 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow cursor-pointer"
+                onClick={() => setExpandedProduct(product)}
+              >
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-40 object-cover rounded-md"
+                />
+                <h3 className="mt-4 text-xl text-blue-950 font-semibold">
+                  {product.name}
+                </h3>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Expanded Product Modal */}
+      {expandedProduct && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-2xl p-6 w-full max-w-3xl relative">
+            {/* Close Button */}
+            <button
+              className="absolute top-2 right-2 text-gray-700 hover:text-black text-2xl"
+              onClick={() => setExpandedProduct(null)}
+            >
+              &times;
+            </button>
+
+            {/* Product Content */}
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              {/* Left: Product Image */}
+              <img
+                src={expandedProduct.image}
+                alt={expandedProduct.name}
+                className="w-full md:w-1/2 h-80 object-cover rounded-md"
+              />
+
+              {/* Right: Product Details */}
+              <div className="w-full md:w-1/2 flex flex-col space-y-4">
+                <h3 className="text-2xl text-blue-950 font-semibold">
+                  {expandedProduct.name}
+                </h3>
+                <p className="text-gray-700">{expandedProduct.description}</p>
+                <img
+                  src={expandedProduct.detail}
+                  alt={`${expandedProduct.name} medidas`}
+                  className="w-full h-60 object-contain rounded-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

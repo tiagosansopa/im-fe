@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(""); // Store selected tab
   const menuRef = useRef(null);
 
   // Close menu when clicking outside
@@ -39,36 +40,22 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6 font-funnel">
-          <a
-            href="#about"
-            className="text-black transition-opacity duration-300 hover:opacity-70"
-          >
-            Nosotros
-          </a>
-          <a
-            href="#values"
-            className="text-black transition-opacity duration-300 hover:opacity-70"
-          >
-            Valores
-          </a>
-          <a
-            href="#location"
-            className="text-black transition-opacity duration-300 hover:opacity-70"
-          >
-            Ubicaciones
-          </a>
-          <a
-            href="#products"
-            className="text-black transition-opacity duration-300 hover:opacity-70"
-          >
-            Productos
-          </a>
-          <a
-            href="#us"
-            className="text-black transition-opacity duration-300 hover:opacity-70"
-          >
-            Historia
-          </a>
+          {["Nosotros", "Valores", "Ubicaciones", "Productos", "Historia"].map(
+            (item, index) => (
+              <a
+                key={index}
+                href={`#${item.toLowerCase()}`}
+                className={`px-4 py-2 transition-colors duration-300 rounded-md ${
+                  activeTab === item.toLowerCase()
+                    ? "bg-yellow-300 text-black"
+                    : "text-black hover:bg-yellow-200 hover:text-gray-900"
+                }`}
+                onClick={() => setActiveTab(item.toLowerCase())}
+              >
+                {item}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Mobile Menu Button */}
@@ -80,51 +67,41 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Sliding Mobile Menu */}
-      <div
-        ref={menuRef}
-        className={`absolute top-0 right-0 h-screen w-2/3 bg-gray-800 text-white transform transition-transform duration-300 ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
-      >
-        <div className="flex flex-col items-center pt-16 space-y-6 font-funnel">
-          <a
-            href="#about"
-            className="text-white transition-opacity duration-300 hover:opacity-70"
+      {/* Full-screen Mobile Menu */}
+      {menuOpen && (
+        <div
+          ref={menuRef}
+          className="fixed inset-0 bg-gray-900 bg-opacity-95 flex flex-col items-center justify-center text-white text-2xl font-funnel transition-opacity duration-300"
+        >
+          {["Nosotros", "Valores", "Ubicaciones", "Productos", "Historia"].map(
+            (item, index) => (
+              <a
+                key={index}
+                href={`#${item.toLowerCase()}`}
+                className={`w-full text-center px-6 py-4 transition-colors duration-300 ${
+                  activeTab === item.toLowerCase()
+                    ? "bg-yellow-300 text-black"
+                    : "hover:bg-yellow-200 hover:text-gray-900"
+                }`}
+                onClick={() => {
+                  setActiveTab(item.toLowerCase());
+                  setMenuOpen(false);
+                }}
+              >
+                {item}
+              </a>
+            )
+          )}
+
+          {/* Close Button */}
+          <button
+            className="absolute top-6 right-6 text-4xl text-white hover:text-yellow-300"
             onClick={() => setMenuOpen(false)}
           >
-            Nosotros
-          </a>
-          <a
-            href="#values"
-            className="text-white transition-opacity duration-300 hover:opacity-70"
-            onClick={() => setMenuOpen(false)}
-          >
-            Valores
-          </a>
-          <a
-            href="#location"
-            className="text-white transition-opacity duration-300 hover:opacity-70"
-            onClick={() => setMenuOpen(false)}
-          >
-            Ubicaciones
-          </a>
-          <a
-            href="#products"
-            className="text-white transition-opacity duration-300 hover:opacity-70"
-            onClick={() => setMenuOpen(false)}
-          >
-            Productos
-          </a>
-          <a
-            href="#us"
-            className="text-white transition-opacity duration-300 hover:opacity-70"
-            onClick={() => setMenuOpen(false)}
-          >
-            Historia
-          </a>
+            ✖
+          </button>
         </div>
-      </div>
+      )}
     </div>
   );
 }

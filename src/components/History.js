@@ -1,13 +1,16 @@
 export default function History() {
   return (
     <section
-      id="us"
-      className="relative p-8 text-white font-funnel"
-      style={{ background: "linear-gradient(to bottom, #121C37, #0B1023)" }}
+      id="historia"
+      className="relative py-24 px-8 text-white font-funnel"
+      style={{
+        background: "linear-gradient(to bottom, #121C37, #0B1023)",
+        minHeight: "80vh",
+      }}
     >
-      <div className="relative z-20 max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div className="relative z-20 max-w-screen-lg mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6">
-          <h2 className="text-3xl font-bold uppercase">Nuestra Historia</h2>
+          <h2 className="text-4xl font-bold uppercase">Nuestra Historia</h2>
           <p className="text-lg leading-relaxed">
             Somos una empresa dedicada a la comercialización de materiales
             derivados del acero desde el año 2020, iniciando operaciones en

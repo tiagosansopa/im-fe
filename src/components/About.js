@@ -1,23 +1,20 @@
 export default function About() {
   return (
     <section
-      id="about"
+      id="nosotros"
       className="relative p-8 text-center items-center text-white font-funnel"
       style={{ background: "linear-gradient(to bottom, #121C37, #0B1023)" }}
     >
-      {/* Top Triangle */}
       <div
         className="absolute -top-20 right-0 w-0 h-0 border-l-[100vw] border-l-transparent border-b-[80px] border-b-[#121C37]"
         aria-hidden="true"
       ></div>
 
-      {/* Bottom Triangle (Overlapping Values Section) */}
       <div
         className="absolute -bottom-[100px] left-0 w-0 h-0 border-r-[100vw] border-r-transparent border-t-[100px] border-t-[#0B1023] z-20"
         aria-hidden="true"
       ></div>
 
-      {/* Centered Container */}
       <div id="thisOne" className="max-w-screen-lg mx-auto">
         <p className="text-lg mb-4">
           Proveemos productos de acero y servicios de alta calidad internacional

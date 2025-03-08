@@ -1,7 +1,7 @@
 export default function Location() {
   return (
     <section
-      id="location"
+      id="ubicaciones"
       className="relative p-8 text-white bg-cover bg-center font-funnel z-10"
       style={{
         backgroundImage: "url('/path/to/your/background.jpg')",
